@@ -1,0 +1,7 @@
+{
+  "name": "ABC Cafe - Birtamod",
+  "description": "A modern, warm, and cozy Nepali café website for ABC Cafe in Birtamod, Jhapa, featuring a full menu, combo offers, and a premium hangout vibe.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}
