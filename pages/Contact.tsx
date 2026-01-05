@@ -1,9 +1,10 @@
 
 import React, { useState } from 'react';
 import { MapPin, Phone, MessageCircle, Send, CheckCircle2 } from 'lucide-react';
-import { BUSINESS_INFO } from '../constants';
+import { useApp } from '../context/AppContext';
 
 const Contact: React.FC = () => {
+  const { businessInfo } = useApp();
   const [submitted, setSubmitted] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -29,7 +30,7 @@ const Contact: React.FC = () => {
             </div>
             <h3 className="text-xl font-bold mb-2">Our Location</h3>
             <p className="text-gray-600 mb-6 leading-relaxed">
-              {BUSINESS_INFO.location}
+              {businessInfo.location}
             </p>
             <a
               href="https://maps.google.com"
@@ -50,10 +51,10 @@ const Contact: React.FC = () => {
               Available daily during business hours.
             </p>
             <a
-              href={`tel:${BUSINESS_INFO.phone}`}
+              href={`tel:${businessInfo.phone}`}
               className="text-2xl font-black text-coffee-900 hover:text-coffee-600 transition-colors"
             >
-              {BUSINESS_INFO.phone}
+              {businessInfo.phone}
             </a>
           </div>
 
@@ -66,7 +67,7 @@ const Contact: React.FC = () => {
               Message us for quick queries or bookings.
             </p>
             <a
-              href={BUSINESS_INFO.whatsapp}
+              href={`https://wa.me/${businessInfo.phone.replace(/[^0-9]/g, '')}`}
               target="_blank"
               rel="noopener noreferrer"
               className="bg-green-500 text-white px-6 py-3 rounded-full font-bold inline-block hover:bg-green-600 transition-colors shadow-lg"
@@ -77,7 +78,6 @@ const Contact: React.FC = () => {
         </div>
 
         <div className="mt-20 grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* Map Embed Placeholder (as iframe isn't usually functional in these snippets, we use a beautiful placeholder) */}
           <div className="rounded-[3rem] overflow-hidden shadow-2xl border-4 border-white h-[600px] relative">
             <div className="absolute inset-0 bg-gray-200 flex items-center justify-center">
                 <iframe 
@@ -93,7 +93,6 @@ const Contact: React.FC = () => {
             </div>
           </div>
 
-          {/* Contact Form */}
           <div className="bg-white p-12 md:p-16 rounded-[3rem] shadow-2xl border border-coffee-200">
             <h2 className="text-3xl font-serif font-bold text-coffee-900 mb-8">Send us a Message</h2>
             {submitted ? (

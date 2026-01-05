@@ -2,9 +2,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Coffee, Utensils, Zap, Clock, ChevronRight, Star } from 'lucide-react';
-import { BUSINESS_INFO, COMBO_OFFERS } from '../constants';
+import { useApp } from '../context/AppContext';
 
 const Home: React.FC = () => {
+  const { businessInfo, comboOffers } = useApp();
+
   return (
     <div className="overflow-hidden">
       {/* Hero Section */}
@@ -26,7 +28,7 @@ const Home: React.FC = () => {
             Fresh Coffee,<br/><span className="italic text-coffee-200">Local Taste.</span>
           </h1>
           <p className="text-xl md:text-2xl text-gray-200 mb-10 max-w-2xl mx-auto leading-relaxed">
-            Relax, sip, and enjoy quality food with a cozy vibe in the heart of Birtamod.
+            Relax, sip, and enjoy quality food with a cozy vibe at {businessInfo.name}.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
@@ -90,7 +92,7 @@ const Home: React.FC = () => {
             </Link>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full md:w-auto">
-            {COMBO_OFFERS.slice(0, 4).map((offer, idx) => (
+            {comboOffers.slice(0, 4).map((offer, idx) => (
               <div key={idx} className="bg-coffee-800/40 backdrop-blur-lg border border-white/10 p-6 rounded-2xl hover:bg-coffee-800 transition-colors">
                 <h4 className="font-bold text-lg mb-2">{offer.title}</h4>
                 <p className="text-coffee-200 font-bold text-2xl">Rs. {offer.price}</p>
@@ -116,9 +118,9 @@ const Home: React.FC = () => {
               <div className="flex flex-col space-y-2">
                 <div className="flex items-center justify-between border-b border-gray-100 pb-2">
                   <span className="font-medium">Everyday</span>
-                  <span className="font-bold text-coffee-900">{BUSINESS_INFO.hours}</span>
+                  <span className="font-bold text-coffee-900">{businessInfo.hours}</span>
                 </div>
-                <div className="pt-2 text-coffee-600 font-medium">Birtamod, Jhapa – See you soon!</div>
+                <div className="pt-2 text-coffee-600 font-medium">{businessInfo.location} – See you soon!</div>
               </div>
             </div>
           </div>
@@ -128,10 +130,10 @@ const Home: React.FC = () => {
       {/* Local Touch Section */}
       <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 text-center">
-          <p className="text-6xl md:text-8xl font-serif text-gray-100 font-bold mb-[-2rem] md:mb-[-4rem] select-none">ABC CAFE</p>
+          <p className="text-6xl md:text-8xl font-serif text-gray-100 font-bold mb-[-2rem] md:mb-[-4rem] select-none uppercase">{businessInfo.name}</p>
           <div className="relative z-10">
             <h2 className="text-4xl md:text-5xl font-serif font-bold text-coffee-900 mb-6">स्वाद, स्नेह र सन्तुष्टि</h2>
-            <p className="text-xl text-gray-600 italic">Welcome to ABC Cafe - Where memories are made over coffee.</p>
+            <p className="text-xl text-gray-600 italic">Welcome to {businessInfo.name} - Where memories are made over coffee.</p>
           </div>
         </div>
       </section>

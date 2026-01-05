@@ -1,10 +1,11 @@
 
 import React, { useState } from 'react';
-import { MENU_ITEMS, COMBO_OFFERS } from '../constants';
+import { useApp } from '../context/AppContext';
 import { MenuCategory } from '../types';
-import { Search, Flame } from 'lucide-react';
+import { Flame } from 'lucide-react';
 
 const Menu: React.FC = () => {
+  const { menuItems, comboOffers } = useApp();
   const [activeCategory, setActiveCategory] = useState<MenuCategory | 'Combos'>('Coffee & Tea');
 
   const categories: (MenuCategory | 'Combos')[] = [
@@ -16,7 +17,7 @@ const Menu: React.FC = () => {
     'Combos'
   ];
 
-  const filteredItems = MENU_ITEMS.filter(item => item.category === activeCategory);
+  const filteredItems = menuItems.filter(item => item.category === activeCategory);
 
   return (
     <div className="min-h-screen bg-[#FAF9F6] pb-24">
@@ -57,7 +58,7 @@ const Menu: React.FC = () => {
 
           {activeCategory === 'Combos' ? (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {COMBO_OFFERS.map((combo, idx) => (
+              {comboOffers.map((combo, idx) => (
                 <div key={idx} className="p-6 rounded-2xl bg-[#FAF9F6] border border-gray-100 relative group overflow-hidden">
                   <div className="absolute top-0 right-0 p-4">
                     <Flame className="h-6 w-6 text-orange-500 fill-current opacity-50 group-hover:opacity-100 transition-opacity" />

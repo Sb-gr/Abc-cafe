@@ -9,6 +9,9 @@ import About from './pages/About';
 import Menu from './pages/Menu';
 import Gallery from './pages/Gallery';
 import Contact from './pages/Contact';
+import Login from './pages/Login';
+import AdminDashboard from './pages/AdminDashboard';
+import { AppProvider } from './context/AppContext';
 
 // Scroll to top on route change
 const ScrollToTop = () => {
@@ -21,23 +24,25 @@ const ScrollToTop = () => {
 
 const App: React.FC = () => {
   return (
-    <Router>
-      <ScrollToTop />
-      <div className="flex flex-col min-h-screen">
-        <Header />
-        <main className="flex-grow">
+    <AppProvider>
+      <Router>
+        <ScrollToTop />
+        <div className="flex flex-col min-h-screen">
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/menu" element={<Menu />} />
-            <Route path="/gallery" element={<Gallery />} />
-            <Route path="/contact" element={<Contact />} />
+            {/* Pages with Header/Footer */}
+            <Route path="/" element={<><Header /><main className="flex-grow"><Home /></main><Footer /><FloatingAction /></>} />
+            <Route path="/about" element={<><Header /><main className="flex-grow"><About /></main><Footer /><FloatingAction /></>} />
+            <Route path="/menu" element={<><Header /><main className="flex-grow"><Menu /></main><Footer /><FloatingAction /></>} />
+            <Route path="/gallery" element={<><Header /><main className="flex-grow"><Gallery /></main><Footer /><FloatingAction /></>} />
+            <Route path="/contact" element={<><Header /><main className="flex-grow"><Contact /></main><Footer /><FloatingAction /></>} />
+            
+            {/* Admin Pages (No Header/Footer) */}
+            <Route path="/login" element={<Login />} />
+            <Route path="/admin" element={<AdminDashboard />} />
           </Routes>
-        </main>
-        <Footer />
-        <FloatingAction />
-      </div>
-    </Router>
+        </div>
+      </Router>
+    </AppProvider>
   );
 };
 
