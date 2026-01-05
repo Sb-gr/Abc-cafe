@@ -22,6 +22,11 @@
         .text-coffee-900 { color: #2c1810; }
         .text-coffee-600 { color: #6d4c41; }
         .border-coffee-200 { border-color: #d7ccc8; }
+        
+        /* Smooth fade-in for the root element once React mounts */
+        #root:empty {
+            background: #FAF9F6;
+        }
     </style>
 <script type="importmap">
 {
@@ -37,5 +42,7 @@
 </head>
 <body class="bg-[#FAF9F6] text-gray-900">
     <div id="root"></div>
+    <!-- The script below is CRITICAL for loading the app -->
+    <script type="module" src="./index.tsx"></script>
 </body>
 </html>
